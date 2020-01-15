@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+   <h1 class="р2 mt-5 display-4 text-center"><strong>Stepik Literature</strong></h1>
+   <p class="text-center mb-5">Портал видеообзоров на детские книги</p>
+
+    <form class="w-50 m-auto" action="/search">
+    <div class="form-row">
+      <div class="col-10">
+        <input type="text" class="form-control" placeholder="Введите слова" name="q">
+      </div>
+
+      <div class="col-2">
+        <input type="button" class="btn btn-primary" value="Найти">
+      </div>
+    </div>
+
+    <p class="mt-3 text-center">Например:
+        {% for tag in tags %}
+          <a href="/search?q={{ tag }}" class="mx-2">{{ tag }}</a>
+        {% endfor %}
+    </p>
+  </form>
+
+  <div class="row mt-5">
+      {% for id, playlist in videos.items() %}
+      <div class="col-6 mt-4">
+       <div class="card" >
+           <div class="card-img-top fluid">
+               <img src="/static/videos/playlist{{ id }}.jpg" class="card-img-top fluid">
+           </div>
+          <div class="card-body">
+            <a class="card-text">{{ playlist.description }}</a>
+            <a href="/playlists/{{ id }}" class="btn btn-primary btn-sm mt-3 float-right">Открыть</a>
+          </div>
+      </div>
+     </div>
+      {% endfor %}
+  </div>
+{% endblock %}
